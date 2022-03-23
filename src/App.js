@@ -1,9 +1,19 @@
-import logo from "./logo.svg";
-import "./App.css";
-import writers from "./writers";
+import { useEffect, useState } from "react";
 import { ProfileCard } from "./ProfileCard";
 
 function App() {
+  const [writers, setWriters] = useState([]);
+
+  useEffect(() => {
+    const getWriters = async () => {
+      const response = await fetch("/writers.json");
+      const data = await response.json();
+      console.log(data);
+      setWriters(data);
+    };
+    getWriters();
+  }, []);
+
   return (
     <div>
       <h1>writer profile</h1>
